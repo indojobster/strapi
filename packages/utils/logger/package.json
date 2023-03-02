@@ -34,8 +34,7 @@
     "watch": "yarn build -w --preserveWatchOutput",
     "clean": "rimraf ./lib",
     "prepublishOnly": "yarn clean && yarn build",
-    "typedoc": "typedoc src/index.ts",
-    "test": "echo \"no tests\""
+    "typedoc": "typedoc src/index.ts"
   },
   "dependencies": {
     "lodash": "4.17.21",
@@ -55,19 +54,16 @@
         "{projectRoot}/tsconfig.json"
       ],
       "production": [
-        "default"
+        "default",
+        "!{projectRoot}/**/__tests/**"
       ]
     },
     "targets": {
-      "build": {
-        "inputs": [
-          "production"
-        ]
-      },
-      "build:ts": {
-        "inputs": [
-          "production"
-        ]
+      "test": {
+        "executor": "@nrwl/jest:jest",
+        "options": {
+          "passWithNoTests": true
+        }
       }
     }
   }
